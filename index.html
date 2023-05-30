@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Music test</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bellota+Text:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Yanone+Kaffeesatz:wght@300&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+  <body>
+    <header class="container-fluid">
+        <div class="container">
+            <div class="row">
+                <div class="col-4">
+                    <h1>Music</h1>
+                </div>
+                <nav class="col-8">
+                    <ul>
+                        <li><a href="index.html">Главная</a></li>
+                        <li><a href="test.html">Тест</a></li>
+                        <li><a href="levels.html">Уровни</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+    <div class="index-wrapper">
+        
+        <div class ="intro">
+            <h1 class ="px-4">Динамическое тестирование обучаемости музыке</h1>
+            <p>Позволь раскрыть в себе музыкальный потенциал</p>
+        </div>
+
+        <main class="index-main">
+            <div class ="index-main-training">
+                <div class ="row">
+                    <div class ="training-text col">Вам будет представлен музыкальный отрывок, а также его части <br>(фиолетовые кнопки под музыкальным проигрывателем)</div>
+                    <div class ="training-img col">
+                        <img src="/img/training_1.png" alt="">
+                    </div>
+                </div>
+                <div class ="row">
+                    <div class ="training-img col">
+                        <img class ="gif" src="/img/training_21.gif" alt="">   
+                    </div>
+                    <div class ="training-text  col">Чтобы прослушать часть мелодии <br>- необходимо нажать на кнопку (она изменит цвет), <br>повторное нажатие на кнопку останавливает проигрывание</div>
+                </div>
+                <div class ="row">
+                    <div class ="training-text col">Под кнопками расположены зоны ответов.<br> Чтобы установить часть мелодии в зону необходимо зажать кнопку и перетащить в нужную зону</div>
+                    <div class ="training-img col">
+                        <img src="/img/training_31.gif" alt="">
+                    </div>
+                </div>          
+            </div>
+
+            <div class="index-main-rules">
+                <div class="trapeze"></div>
+                <div class="trapeze"></div>
+                <div class="rules-info">
+                    <h2 class ="rules-title text-center">Правила обучения</h2>
+
+                    <div class ="rules-text row" style="padding-left: 30px;">
+                        Во время первого теста (легкий уровень) мы оцениваем Ваш самостоятельный 
+                        навык построения композиции, поэтому не показываем подсказку
+                    </div>
+                    <div class ="rules-text row" style="padding-left: 40px;">
+                        Если Вы часто ошибались - в следующих попытках будет представлена возможность воспользоваться 
+                        подсказкой (посмотреть линию прогресса) А вот использовать ее или нет - решать Вам
+                    </div>
+                    <div class ="rules-text row" style="padding-left: 100px; padding-right: 50px;">
+                        Один правильный ответ (фрагмент в правильном месте) = одно деление линии прогресса. 
+                        Неправильные действия уменьшают линию прогресса
+                    </div>
+                    <div class ="rules-text row" style="padding-left: 131px; padding-right: 108px;">
+                        Всего 10 уровней обучаемости. 1 - самый низкий. Как только Вы достигнете 10 уровня 
+                        - можно будет посмотреть результаты прохождения теста. У самих заданий тоже есть <a class="rules-link" href="levels.html">Уровни</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class ="rules-info-gif row">
+                <img class ="rules-gif" src="/img/rules.gif" alt="">
+            </div>
+
+            <button class ="level__button" id ="start" onclick="document.location='test.html'">
+                Начать тестирование!
+                <div class = "title hidden">audio/Pustbegut/pustbegut.mp3</div>
+                <div class = "hidden">audio/Pustbegut/pustbegut_1.mp3</div>
+                <div class = "hidden">audio/Pustbegut/pustbegut_2.mp3</div>
+                <div class = "hidden">audio/Pustbegut/pustbegut_3.mp3</div>
+                <div class = "hidden">audio/Pustbegut/pustbegut_4.mp3</div>
+                <div class = "hidden">audio/Pustbegut/pustbegut_5.mp3</div>
+                <div class = "hidden">audio/Pustbegut/pustbegut_6.mp3</div>
+                <div class = "hidden">audio/Pustbegut/pustbegut_7.mp3</div>
+                <div class = "hidden">audio/Pustbegut/pustbegut_8.mp3</div>
+            </button>    
+        </main>
+     </div>
+     <script src="js/play.js"></script>
+     <script src="js/savemusiclist.js"></script>
+     <script type = "module" src="js/drop.js"></script>
+</body>
+</html>
