@@ -476,6 +476,7 @@ img{
     height: 45px;
     font-size: 20pt;
     cursor: pointer;
+    margin: 20px;
 }
 
 
@@ -503,6 +504,21 @@ img{
     .index-main-rules .rules-info .rules-text{  
         font-size: 17px; 
     }
+    .rules-info .rules-text:nth-child(2){
+        padding-left: 30px;
+    }
+    .rules-info .rules-text:nth-child(3){
+        padding-left: 40px;
+    }
+    .rules-info .rules-text:nth-child(4){
+        padding-left: 100px;
+        padding-right: 50px;
+    }
+    .rules-info .rules-text:nth-child(5){
+        padding-left: 131px; 
+        padding-right: 108px;
+    }
+
 }
 @media (max-width: 768px) {
     
@@ -563,7 +579,102 @@ img{
         width: 12%;
         height: 24px;
     }
+}
 
+@media (max-width: 425px) {
+    
+    *{
+        font-size: 14px;
+    }    
+    .container .row{
+        flex-wrap: nowrap
+    }
+    header, header .container, .container .row, .container .row .col{
+        height: 30px;
+    }
+    h1{
+        font-size: x-large;
+        margin-top: 13px;
+    }
+    a{
+        font-size: 14px;
+    }
+    .col-8{
+        width: 76%;
+    }
+    .head__content{
+        font-size: 17px;
+    }
+    .test-main{
+        width: 100%;
+    }
+    .modal{
+        padding: 8px;
+        width: 90%;
+    }
+    .results__wrapper .row .col,
+    .btn-close, 
+    .training-text{
+        font-size: 10px;
+    }
+    .index-main-rules{
+        margin-top: 20px;
+    }
+    .index-main-rules .rules-info {
+        margin: 0px 10px 0 10px;
+        justify-content: center;
+    }
+    .index-main-rules .rules-info h3,
+    .intro p{  
+        font-size: 16px; 
+    }
+    .index-main-rules .rules-info .rules-text { 
+        font-size: 13px; 
+    }
+    audio{
+        height: 25px;
+    }
+    .buttons, 
+    .answers{
+        width: 93%;
+    }
+    .buttons__content{
+        width: 100%;
+        height: 40px;
+    }
+    .button, 
+    .answer{
+        width: 12%;
+        height: 23px;
+    }
+    .intro{
+        text-align: center;
+    }
+    .index-main-training .row{
+        flex-direction: column;
+    }
+    .index-main-rules .rules-info .rules-text,
+    .index-main__levels .row .row .col{
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+    .trapeze{
+        display: none;
+    }
+    audio{
+        width: 96%;
+    }
+    .index-main__levels{
+        margin: 25px;
+    }
+    .level__button{
+        width: 85%;
+        font-size: 15px;
+    }
+    .index-main__levels .row{
+        margin: 3px;
+        --bs-gutter-x: -0.5rem;
+    }
 }
 
 
@@ -606,11 +717,11 @@ body::-webkit-scrollbar {
     width: 12px;
   }
   
-  body::-webkit-scrollbar-track {
+body::-webkit-scrollbar-track {
     background: rgb(41, 40, 40);        
-  }
+}
   
-  body::-webkit-scrollbar-thumb {
+body::-webkit-scrollbar-thumb {
     background-color:#5c5b5b;    
     border-radius: 20px;       
-  }
+}
