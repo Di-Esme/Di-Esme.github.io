@@ -233,7 +233,7 @@ audio{
     flex-direction: column; 
     width: 100%;
     height: 600px;
-    background: url("../img/piano.jpg");
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.5) 100%), url("../img/piano.jpg");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
