@@ -28,6 +28,7 @@ dropZones.forEach(dropZones => {
 
 let leavedZone = null;
 let draggedBtn = null;
+let buttCont = null;
 let moveCount = 1;
 
 function handlerDragstart(event) {
@@ -37,8 +38,11 @@ function handlerDragstart(event) {
 }
 
 function handlerDragend(event) {
+    buttCont = $(".buttons__content .button").toArray().map(el => el.id);
+    progressBar(this.closest('div'));
+
     this.classList.remove("button--active");
-    draggedBtn = null;
+
     
 }
 
@@ -111,16 +115,13 @@ function nextLevel(incorAnswersCounter, corAnswersCounter, answersCounter, hintP
             list = listNew;
             resultsList.splice(0, 0, m);
             list.push(resultsList);
-            console.log("скачанный + текущая попытка", list);
             localStorage.setItem("resList", JSON.stringify(list));
         }
     } 
     else{
         m = 1;
         resultsList.splice(0, 0, m);
-        console.log("Лист без текущей попытки ", list);
         list.push(resultsList);
-        console.log("Лист с текущей попыткой ", list);
         localStorage.setItem("resList", JSON.stringify(list));
     }
 
@@ -135,7 +136,7 @@ function nextLevel(incorAnswersCounter, corAnswersCounter, answersCounter, hintP
         }
         else{
             results.innerText = "Вы достигли максимального уровня!";
-            showRes.style.display = 'inline-block';          
+                   
         }  
     }      
     localStorage.setItem("savelvl", lvl);    
@@ -195,8 +196,9 @@ if (showBtn) {
 
 /*  Линия прогресса */
 
-function progressBar(zone, buttCont) {
-    if ((zone !== leavedZone) & (zone.classList.contains('full') === false)) {
+function progressBar(zone) {
+
+    if (zone !== leavedZone) {
         if (draggedBtn.classList.contains(zone.dataset.id)) {
             if (leavedZone.classList.contains('buttons__content')) {
                 answersCounter += 1;
@@ -251,21 +253,34 @@ function progressBar(zone, buttCont) {
                         progressbar.style.width = `${progress}%`;
                         moveCount += 2;
                     }
-
                 }
-
             }
         }
+    }
+
+    draggedBtn = null;
+    leavedZone = null;
+
+    /* Подсказка для первого уровня */
+
+    if (listNew === null){
+        if (incorAnswersCounter >= corAnswersCounter + 2){
+            progressbar.style.display = 'block';
+        }else{
+            progressbar.style.display = 'none';
+        }
+    
     }
 
     if (progressbar.style.width === "100%"){
         clearInterval(timerId);
         clearInterval(exTime);
         nextLevel(incorAnswersCounter, corAnswersCounter, answersCounter, hintProgress, min, sec);
+        showRes.style.display = 'inline-block';   
     }
     else{
         if (typeof results.innerText !== 'undefined') {
-            if (buttCont.length < 2){
+            if (buttCont.length == 0){
                 results.innerText = "Прослушайте изначальный вариант и Ваш еще раз, где-то есть ошибки";
             }
             else{
@@ -305,10 +320,6 @@ function handlerDrop(event) {
 
         leavedZone.classList.remove("full");
     }
-
-    progressBar(this, d);
-
-    leavedZone = null;
 
     if (this.classList.contains('answer') === true) {
         this.classList.add("full");
