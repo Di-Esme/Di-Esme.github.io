@@ -41,6 +41,7 @@ header ul li a{
     font-weight:700;
     color: #949090;
     text-shadow: 1px 0 10px #918f92;
+    font-size: 30px;
 }
 
 header ul li a:hover {
