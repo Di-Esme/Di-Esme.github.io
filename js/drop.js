@@ -266,8 +266,7 @@ function progressBar(zone) {
     if (listNew === null){
         if (incorAnswersCounter >= corAnswersCounter + 2){
             progressbar.style.display = 'block';
-        }
-    
+        }    
     }
 
     if (progressbar.style.width === "100%"){
