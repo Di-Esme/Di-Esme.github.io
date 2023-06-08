@@ -10,6 +10,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bellota+Text:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Yanone+Kaffeesatz:wght@300&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
   <body>
@@ -22,8 +23,8 @@
                 <nav class="col-8">
                     <ul>
                         <li><a href="index.html">Главная</a></li>
-                        <li><a href="test.html">Тест</a></li>
-                        <li><a href="levels.html">Уровни</a></li>
+                        <li><a href="levels.html">Мелодии</a></li>
+                        <li><a href="resultpage.html">Результаты</a></li>
                     </ul>
                 </nav>
             </div>
@@ -68,6 +69,7 @@
                     <button class="footer__content" id="show"> Подсказка!</button>
                     <div class="footer__content" id="results"></div>
                     <button class ="test-main__button" id ="next-level" onclick="document.location='test.html'">Продолжить</button>
+                    <button class ="test-main__button" id ="levels" onclick="document.location='levels.html'">Перейти к мелодиям</button>
                     <button class ="test-main__button" id ="show-results">Показать результаты</button>
                 </div>
             </div>
@@ -76,9 +78,9 @@
                 <div class="flex">
                   <button class="btn-close">⨉</button>
                 </div>
-                <div>
-                  <h3>Результаты теста</h3>
-                  <p>
+                <div class="modal-text">
+                    <h3>Результаты теста</h3>
+                    <p></p>
                     <div class="results__wrapper">
                         <div class="row">
                             <div class="col results__head">№ Попытки</div>
@@ -89,8 +91,9 @@
                             <div class="col results__head">Уровень</div>
                         </div>
                     </div>
-                  </p>
+                    <p></p>
                 </div>
+                <button class="saveres">Сохранить результаты</button>
               </section>
             <div class="overlay hidden"></div>
            

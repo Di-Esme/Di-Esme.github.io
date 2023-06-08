@@ -4,9 +4,14 @@ const progressbar = document.getElementById('progressbar');
 const results = document.getElementById('results');
 const showBtn = document.getElementById('show');
 const next = document.getElementById('next-level');
+const levels = document.getElementById('levels');
 const lvlNew = localStorage.getItem("savelvl");
+const saveResults = document.querySelector(".saveres");
 const showRes = document.getElementById('show-results');
 const modal = document.querySelector(".modal");
+const modaltext = document.querySelector(".modal-text");
+const musiclevel = document.getElementById('music-level');
+const resultInfo = JSON.parse(localStorage.getItem("resultInfo"));
 const overlay = document.querySelector(".overlay");
 const closeModalBtn = document.querySelector(".btn-close");
 const results_wrapper = document.querySelector(".results__wrapper");
@@ -41,19 +46,17 @@ function handlerDragend(event) {
     buttCont = $(".buttons__content .button").toArray().map(el => el.id);
     progressBar(this.closest('div'));
 
-    this.classList.remove("button--active");
-
-    
+    this.classList.remove("button--active");   
 }
 
 var corAnswersCounter = 0;
 var incorAnswersCounter = 0;
-var answersCounter = 0;
 var hintProgress = 0;
 var progress = 0;
 let r = 0;
 let min = 0;
 let sec = 0;
+
 
 /* Время прохождения задания */
 
@@ -77,8 +80,9 @@ var timerId = setInterval(function timer(){
 
 /* Определение уровня + добавление данных в массив + информация о результатах */
 
-function nextLevel(incorAnswersCounter, corAnswersCounter, answersCounter, hintProgress, min, sec) {
+function nextLevel(incorAnswersCounter, corAnswersCounter, hintProgress, min, sec) {
     let lvl = 0;
+    let answersCounter = incorAnswersCounter + corAnswersCounter;
     let res = incorAnswersCounter / answersCounter;
     let list = [];
     let m = 0;
@@ -107,36 +111,55 @@ function nextLevel(incorAnswersCounter, corAnswersCounter, answersCounter, hintP
 
     /* Добавление данных в массив результатов */
 
-    let resultsList = [corAnswersCounter, answersCounter, hintProgress, time, lvl];
+    let newTry = {
+        diflvl: resultInfo.difficulty,
+        namelvl: resultInfo.name,
+        tryCount: 0,
+        correct: corAnswersCounter,
+        all: answersCounter,
+        hint: hintProgress,
+        time: time,
+        lvl: lvl,        
+    }
 
     if (listNew !== null){
         if (listNew.length !== 0){
-            m = listNew.length + 1;
+            if (listNew[listNew.length-1].namelvl == newTry.namelvl){
+                m = listNew[listNew.length-1].tryCount + 1;
+            }
+            else{ m = 1;}
+            
+            newTry.tryCount = m;  
             list = listNew;
-            resultsList.splice(0, 0, m);
-            list.push(resultsList);
+            list.push(newTry);
             localStorage.setItem("resList", JSON.stringify(list));
         }
-    } 
-    else{
+    }else{
         m = 1;
-        resultsList.splice(0, 0, m);
-        list.push(resultsList);
+        newTry.tryCount = m;
+        list.push(newTry);
         localStorage.setItem("resList", JSON.stringify(list));
-    }
+    }  
+ 
 
     addResults(list);
 
      /* Информация о результатах */
    
     if (typeof results.innerText !== 'undefined') {
-        if (lvl < 10){
-            results.innerText = "Вы справились! Ваш уровень " + lvl + " !";
+        if (newTry.lvl < 10){
+            results.innerText = "Пока что у Вас дольно много ошибок. Продолжим!";
             next.style.display = 'inline-block';
         }
         else{
-            results.innerText = "Вы достигли максимального уровня!";
-                   
+            if(newTry.hint == 0){
+                results.innerText = "Вы достигли максимального уровня!";
+                levels.style.display = 'inline-block';
+            }
+            else{
+                results.innerText = "Вы справились, но использовали подсказку. Повторите тест без использования подсказки";
+                next.style.display = 'inline-block';
+            }                   
         }  
     }      
     localStorage.setItem("savelvl", lvl);    
@@ -144,22 +167,47 @@ function nextLevel(incorAnswersCounter, corAnswersCounter, answersCounter, hintP
 
 /* Функции для модального окна */
 
-const addResults = function(list) {
-    for (var value in list){
-        let rowLast = document.createElement('div');
-        rowLast.classList.add("row"); 
-        rowLast.classList.add("take_"+ value[0]);   
-        results_wrapper.append(rowLast);
+const addRow = function(trylist, m){
 
-        const newRow = document.querySelector(".take_" + value[0]);
-        
-        for (var item in list[value]){            
-            let colLast = document.createElement('div');
-            colLast.classList.add("col");
-            colLast.innerHTML = list[value][item];
-            newRow.append(colLast);
+
+    let rowLast = document.createElement('div');
+    rowLast.classList.add("row"); 
+    rowLast.classList.add("take_"+ m);   
+    results_wrapper.append(rowLast);
+
+
+    const newRow = document.querySelector(".take_" + m);
+
+
+    for (let i = 2; i < Object.keys(trylist).length; ++i){
+        let colLast = document.createElement('div');
+        colLast.classList.add("col");
+        colLast.innerHTML = Object.values(trylist)[i];
+        newRow.append(colLast);
+    }   
+}
+
+const addResults = function(list) { 
+
+    for (let i = 0; i < list.length; ++i){
+
+        if (i != 0 && list[i].namelvl !== list[i-1].namelvl){
+            let infolvl = document.createElement('h4');
+            infolvl.classList.add("music-level");
+            infolvl.innerHTML = list[i].diflvl + '  ' + list[i].namelvl;
+            results_wrapper.append(infolvl);
+            addRow(list[i], i);
         }
-    }
+        else{
+            if(i == 0){
+                let infolvl = document.createElement('h4');
+                infolvl.classList.add("music-level");
+                infolvl.innerHTML = list[i].diflvl + '  ' + list[i].namelvl;
+                results_wrapper.append(infolvl); 
+            }
+            addRow(list[i], i);
+        }
+    }  
 }
 
 const openModal = function () {
@@ -181,6 +229,23 @@ if (closeModalBtn){
     closeModalBtn.addEventListener("click", closeModal);
 }
 
+/* Сохранение результатов в PDF */
+
+saveResults.addEventListener("click", (event) => {
+    event.preventDefault();
+
+    var opt =
+    {
+        margin: 0.3,
+        filename: 'Results.pdf',
+        html2canvas: {scale: 3},
+        jsPDF: {unit: 'in', format: 'A3', orientation: 'portrait'}
+    }
+
+    html2pdf().set(opt).from(modaltext).save();
+
+});
+
 /* Клик по подсказке - показать прогресс */
 
 if (showBtn) {
@@ -201,13 +266,11 @@ function progressBar(zone) {
     if (zone !== leavedZone) {
         if (draggedBtn.classList.contains(zone.dataset.id)) {
             if (leavedZone.classList.contains('buttons__content')) {
-                answersCounter += 1;
                 corAnswersCounter += 1;
                 progress = progress + 12.5;
                 progressbar.style.width = `${progress}%`;
             }
             else {
-                answersCounter += 1;
                 corAnswersCounter += 1;
                 progress = progress + 6.25 * moveCount;
                 moveCount = 1;
@@ -217,13 +280,11 @@ function progressBar(zone) {
         else {
             if (zone.classList.contains('buttons__content')) {
                 if (draggedBtn.classList.contains(leavedZone.dataset.id)) {
-                    answersCounter += 1;
                     incorAnswersCounter += 1;
                     progress = progress - 12.5;
                     progressbar.style.width = `${progress}%`;
                 }
                 else {
-                    answersCounter += 1;
                     corAnswersCounter += 1;
                     progress = progress + 6.25 * (moveCount - 2);
                     progressbar.style.width = `${progress}%`;
@@ -232,7 +293,6 @@ function progressBar(zone) {
             }
             else {
                 if (leavedZone.classList.contains('buttons__content')) {
-                    answersCounter += 1;
                     incorAnswersCounter += 1;
                     progress = progress - 6.25;
                     progressbar.style.width = `${progress}%`;
@@ -240,14 +300,12 @@ function progressBar(zone) {
                 }
                 else {
                     if (draggedBtn.classList.contains(leavedZone.dataset.id)) {
-                        answersCounter += 1;
                         incorAnswersCounter += 1;
                         moveCount += 1;
                         progress = progress - 6.25 * moveCount;
                         progressbar.style.width = `${progress}%`;
                     }
                     else {
-                        answersCounter += 1;
                         incorAnswersCounter += 1;
                         progress = progress - 12.5;
                         progressbar.style.width = `${progress}%`;
@@ -264,7 +322,7 @@ function progressBar(zone) {
     /* Подсказка для первого уровня */
 
     if (listNew === null){
-        if (incorAnswersCounter >= corAnswersCounter + 2){
+        if (incorAnswersCounter > 15){
             progressbar.style.display = 'block';
         }    
     }
@@ -272,7 +330,7 @@ function progressBar(zone) {
     if (progressbar.style.width === "100%"){
         clearInterval(timerId);
         clearInterval(exTime);
-        nextLevel(incorAnswersCounter, corAnswersCounter, answersCounter, hintProgress, min, sec);
+        nextLevel(incorAnswersCounter, corAnswersCounter, hintProgress, min, sec);
         showRes.style.display = 'inline-block';   
     }
     else{
@@ -322,4 +380,5 @@ function handlerDrop(event) {
         this.classList.add("full");
     }
 }
+
 

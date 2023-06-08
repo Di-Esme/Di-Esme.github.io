@@ -22,8 +22,8 @@
                 <nav class="col-8">
                     <ul>
                         <li><a href="index.html">Главная</a></li>
-                        <li><a href="test.html">Тест</a></li>
-                        <li><a href="levels.html">Уровни</a></li>
+                        <li><a href="levels.html">Мелодии</a></li>
+                        <li><a href="resultpage.html">Результаты</a></li>
                     </ul>
                 </nav>
             </div>
@@ -32,14 +32,12 @@
     <div class="index-wrapper">
         <main class="index-main">
             <div class="index-main__levels">
-                <div class="row">
-                    <h3>Легкий уровень</h3>
-                    <div class="row">
-                        <div class="levels_text col">                        
-                            Мелодия из мультфильма "Чебурашка"
-                        </div>
-                        <div class="col">
-                            <button class="level__button" id="pustbegut" onclick="document.location='test.html'">
+                <div class="levels-list row" id="easy-level">
+                    <h3>Легкие мелодии</h3>
+                    <div class="row" id="easy-level-first">
+                        <div class="levels_text col">Мелодия из мультфильма "Чебурашка"</div>
+                        <div class="button-wrap col">
+                            <button class="level__button" id="pustbegut">
                                 Начать тестирование!
                                 <div class = "title hidden">./audio/Pustbegut/pustbegut.mp3</div>
                                 <div class = "hidden">./audio/Pustbegut/pustbegut_1.mp3</div>
@@ -52,13 +50,17 @@
                                 <div class = "hidden">./audio/Pustbegut/pustbegut_8.mp3</div>
                             </button>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="levels_text col">                        
-                            Мелодия из мультфильма "Мама для мамонтенка"
+                        <div class="col-1">
+                            <label class="checkbox-other">
+                                <input type="checkbox" id="pustbegut-check" disabled>
+                                <span></span>
+                            </label>
                         </div>
-                        <div class ="col">
-                            <button class="level__button" id="mamont" onclick="document.location='test.html'">
+                    </div>
+                    <div class="row" id="easy-level-second">
+                        <div class="levels_text col">Мелодия из мультфильма "Мама для мамонтенка"</div>
+                        <div class ="button-wrap col">
+                            <button class="level__button" id="mamont">
                                 Начать тестирование!
                                 <div class = "title hidden">./audio/Mamont/mamont.mp3</div>
                                 <div class = "hidden">./audio/Mamont/mamont_1.mp3</div>
@@ -71,13 +73,17 @@
                                 <div class = "hidden">./audio/Mamont/mamont_8.mp3</div>
                             </button>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="levels_text col">                        
-                            Мелодия из фильма "Гарри Поттер"
+                        <div class="col-1">
+                            <label class="checkbox-other">
+                                <input type="checkbox" id="mamont-check" disabled>
+                                <span></span>
+                            </label>
                         </div>
-                        <div class="col">
-                            <button class="level__button" id="potter" onclick="document.location='test.html'">
+                    </div>
+                    <div class="row" id="easy-level-third">
+                        <div class="levels_text col">Мелодия из фильма "Гарри Поттер"</div>
+                        <div class="button-wrap col">
+                            <button class="level__button" id="potter">
                                 Начать тестирование!
                                 <div class = "title hidden">./audio/Potter/potter.mp3</div>
                                 <div class = "hidden">./audio/Potter/potter_1.mp3</div>
@@ -90,16 +96,20 @@
                                 <div class = "hidden">./audio/Potter/potter_8.mp3</div>
                             </button>
                         </div>
+                        <div class="col-1">
+                            <label class="checkbox-other">
+                                <input type="checkbox" id="potter-check" disabled>
+                                <span></span>
+                            </label>
+                        </div>
                     </div>
                 </div>
-                <div class ="row">
-                    <h3>Средний уровень</h3>
-                    <div class ="row">
-                        <div class ="levels_text col">                        
-                            Мелодия из мультфильма "Анастасия"
-                        </div>
-                        <div class ="col">
-                            <button class="level__button" id="anastasia" onclick="document.location='test.html'">
+                <div class ="levels-list row" id="middle-level">
+                    <h3>Мелодии средней сложности</h3>
+                    <div class ="row" id="middle-level-first">
+                        <div class ="levels_text col">Мелодия из мультфильма "Анастасия"</div>
+                        <div class ="button-wrap col">
+                            <button class="level__button" id="anastasia" disabled="true">
                                 Начать тестирование!
                                 <div class = "title hidden">./audio/Anastasia/anastasia.mp3</div>
                                 <div class = "hidden">./audio/Anastasia/anastasia_1.mp3</div>
@@ -112,13 +122,17 @@
                                 <div class = "hidden">./audio/Anastasia/anastasia_8.mp3</div>
                             </button>
                         </div>
-                    </div>
-                    <div class ="row">
-                        <div class ="levels_text col">                        
-                            И.С. Бах "Прелюдия До мажор"
+                        <div class="col-1">
+                            <label class="checkbox-other">
+                                <input type="checkbox" id="anastasia-check" disabled>
+                                <span></span>
+                            </label>
                         </div>
-                        <div class ="col">
-                            <button class="level__button" id="bach" onclick="document.location='test.html'">
+                    </div>
+                    <div class ="row" id="middle-level-second">
+                        <div class ="levels_text col">И.С. Бах "Прелюдия До мажор"</div>
+                        <div class ="button-wrap col">
+                            <button class="level__button" id="bach" disabled="true">
                                 Начать тестирование!
                                 <div class = "title hidden">./audio/Bach/bach.mp3</div>
                                 <div class = "hidden">./audio/Bach/bach_1.mp3</div>
@@ -131,13 +145,17 @@
                                 <div class = "hidden">./audio/Bach/bach_8.mp3</div>
                             </button>
                         </div>
-                    </div>
-                    <div class ="row">
-                        <div class ="levels_text col">                        
-                            Мелодия из мультика "Бременские музыканты"
+                        <div class="col-1">
+                            <label class="checkbox-other">
+                                <input type="checkbox" id="bach-check" disabled>
+                                <span></span>
+                            </label>
                         </div>
-                        <div class ="col">
-                            <button class="level__button" id="musicanti" onclick="document.location='test.html'">
+                    </div>
+                    <div class ="row" id="middle-level-third">
+                        <div class ="levels_text col">Мелодия из мультика "Бременские музыканты"</div>
+                        <div class ="button-wrap col">
+                            <button class="level__button" id="musicanti" disabled="true">
                                 Начать тестирование!
                                 <div class = "title hidden">./audio/Musicanti/musicanti.mp3</div>
                                 <div class = "hidden">./audio/Musicanti/musicanti_1.mp3</div>
@@ -150,16 +168,20 @@
                                 <div class = "hidden">./audio/Musicanti/musicanti_8.mp3</div>
                             </button>
                         </div>
+                        <div class="col-1">
+                            <label class="checkbox-other">
+                                <input type="checkbox" id="musicanti-check" disabled>
+                                <span></span>
+                            </label>
+                        </div>
                     </div>
                 </div>
-                <div class ="row">
-                    <h3>Сложный уровень</h3>
-                    <div class ="row">
-                        <div class ="levels_text col">                        
-                            Римский-Корсаков "Полёт шмеля"
-                        </div>
-                        <div class ="col">
-                            <button class="level__button" id="shmel" onclick="document.location='test.html'">
+                <div class ="levels-list row" id="hard-level">
+                    <h3>Сложные мелодии</h3>
+                    <div class ="row" id="hard-level-first">
+                        <div class ="levels_text col">Римский-Корсаков "Полёт шмеля"</div>
+                        <div class ="button-wrap col">
+                            <button class="level__button" id="shmel" disabled>
                                 Начать тестирование!
                                 <div class = "title hidden">./audio/Shmel/shmel.mp3</div>
                                 <div class = "hidden">./audio/Shmel/shmel_1.mp3</div>
@@ -172,13 +194,17 @@
                                 <div class = "hidden">./audio/Shmel/shmel_8.mp3</div>
                             </button>
                         </div>
-                    </div>
-                    <div class ="row">
-                        <div class ="levels_text col">                        
-                            Рахманинов "Прелюдя Оп.3 №2"
+                        <div class="col-1">
+                            <label class="checkbox-other">
+                                <input type="checkbox" id="shmel-check" disabled>
+                                <span></span>
+                            </label>
                         </div>
-                        <div class ="col">
-                            <button class="level__button" id="rachmaninov" onclick="document.location='test.html'">
+                    </div>
+                    <div class ="row" id="hard-level-second">
+                        <div class ="levels_text col">Рахманинов "Прелюдя Оп.3 №2"</div>
+                        <div class ="button-wrap col">
+                            <button class="level__button" id="rachmaninov" disabled>
                                 Начать тестирование!
                                 <div class = "title hidden">./audio/Rachmaninov/rachmaninov.mp3</div>
                                 <div class = "hidden">./audio/Rachmaninov/rachmaninov_1.mp3</div>
@@ -191,13 +217,17 @@
                                 <div class = "hidden">./audio/Rachmaninov/rachmaninov_8.mp3</div>
                             </button>
                         </div>
-                    </div>
-                    <div class ="row">
-                        <div class ="levels_text col">                        
-                            Бетховен "Лунная соната"
+                        <div class="col-1">
+                            <label class="checkbox-other">
+                                <input type="checkbox" id="rachmaninov-check" disabled>
+                                <span></span>
+                            </label>
                         </div>
-                        <div class ="col">
-                            <button class="level__button" id="beethoven" onclick="document.location='test.html'">
+                    </div>
+                    <div class ="row" id="hard-level-third">
+                        <div class ="levels_text col">Бетховен "Лунная соната"</div>
+                        <div class ="button-wrap col">
+                            <button class="level__button" id="beethoven" disabled>
                                 Начать тестирование!
                                 <div class = "title hidden">./audio/Beethoven/beethoven.mp3</div>
                                 <div class = "hidden">./audio/Beethoven/beethoven_1.mp3</div>
@@ -209,6 +239,12 @@
                                 <div class = "hidden">./audio/Beethoven/beethoven_7.mp3</div>
                                 <div class = "hidden">./audio/Beethoven/beethoven_8.mp3</div>
                             </button>
+                        </div>
+                        <div class="col-1">
+                            <label class="checkbox-other">
+                                <input type="checkbox" id="beethoven-check" disabled>
+                                <span></span>
+                            </label>
                         </div>
                     </div>
                 </div>          

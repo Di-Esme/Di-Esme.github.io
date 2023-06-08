@@ -33,19 +33,21 @@ var playlist = function() {
     var track = getRandomNumber();
     pl = dict[track];
     playbtn.classList.add(track);
-    playbtn.innerText = playbtn.id;
-    playbtn.addEventListener("click", function() {       
-      if (pl.paused) {
-          pl.play();
-          this.classList.add("button--active");
-          setTimeout(() => {
-            this.classList.remove("button--active");
-          }, 5600);
-      } else {
-          pl.pause();
+    // playbtn.innerText = playbtn.id;
+    playbtn.innerText = track;
+    playbtn.addEventListener("click", function() {
+      if (pl.paused){
+        pl.play();
+        this.classList.add("button--active");
+        setTimeout(() => {
           this.classList.remove("button--active");
-          pl.currentTime = 0;
-      }              
+        }, 5600);
+      }
+      else{
+        pl.pause();
+        this.classList.remove("button--active");
+        pl.currentTime = 0;
+      } 
     });   
   });
 }

@@ -21,7 +21,8 @@ a {
 /* HEADER */
 
 header {
-    background: #000000b6;
+    background: #000000b9;
+    top: 0;
 }
 
 header ul {
@@ -477,6 +478,18 @@ img{
     margin: 15px;
 }
 
+/* #middle-level,
+#hard-level,
+#easy-level-second,
+#easy-level-third{
+    display: none;
+} */
+
+.button-wrap{
+    display: flex;
+    justify-content: flex-end;
+}
+
 .level__button{
     border: 0;
     border-radius: 17px;
@@ -488,6 +501,70 @@ img{
     font-size: 70%;
 }
 
+.level__button:disabled {
+	color: #000000;
+	cursor: default;
+}
+.level__button:disabled {
+	filter: grayscale(80%);
+	opacity: 0.6;
+}
+
+
+.checkbox-other {
+	display: flex;
+	margin: 0;
+	line-height: 14px;
+	user-select: none;
+	position: relative;
+}
+.checkbox-other input[type=checkbox] {
+	position: absolute;
+	z-index: -1;
+	opacity: 0;
+	display: flex;
+	width: 0;
+	height: 0;
+}
+.checkbox-other span {
+	display: inline-block;
+	position: relative; 
+	padding: 0; 
+	line-height: 14px;    
+}
+.checkbox-other span:before {
+	content: "";
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	left: 0;
+	top: 0;
+	border: 1px solid #ab61ce;
+	box-shadow: inset 0 0 3px #8a8a8a;
+}
+/* Checked */
+.checkbox-other input[type=checkbox] + span:after {
+	content: "";	
+	opacity: 0;
+	transition: opacity 0.3s ease;
+}
+.checkbox-other input[type=checkbox]:checked + span:after {
+	content: "✓";
+	color: rgb(130, 37, 189);
+	font-size: 30px;
+	font-weight: 900;
+	position: absolute;
+	left: 0;
+	top: -2px;
+	opacity: 1;
+}
+
+/* Disabled */
+.checkbox-other:disabled {
+	color: #666;
+    filter: grayscale(100%);
+	opacity: 0.6;
+}
 /* Всплывающее окно с результатами */
 
 .modal{
@@ -522,6 +599,11 @@ img{
     color: #777;
     margin: 0.4rem 0 0.2rem;
 }
+
+.music-level{
+    font-size: 1rem;
+}
+
 .modal .results__wrapper{
     display: flex;
     flex-direction: column;
@@ -530,8 +612,11 @@ img{
     align-items: center;
 }
 .modal .results__wrapper .row .col{
-    font-size: 85%;
+    font-size: 80%;
     padding: 5px;
+}
+.modal-text{
+    text-align: center;
 }
 
 .btn-close{
@@ -557,7 +642,8 @@ img{
     display: none;
 }
 
-#start{
+#start,
+.saveres{
     border: 0;
     border-radius: 17px;
     background: #6d3e99;
@@ -567,6 +653,30 @@ img{
     font-size: 20pt;
     cursor: pointer;
     margin: 20px;
+}
+
+/* Страница результатов */
+
+.results-main{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: center;
+    align-items: center;
+}
+
+.results-main-canvas{
+    margin-top: 5px;
+    margin-bottom: 5px;
+
+}
+
+
+.canvas{
+    display: block;
+    box-sizing: border-box;
+    height: 300px;
+    width: 600px;
 }
 
 
@@ -877,10 +987,10 @@ img{
 
 @keyframes neon-1 {
     from {
-        text-shadow: 0 0 6px rgba(146, 107, 170, 0.92), 0 0 30px rgba(222, 202, 228, 0.34), 0 0 12px rgba(242, 191, 255, 0.52), 0 0 21px rgba(226, 191, 255, 0.92), 0 0 34px rgba(235, 191, 255, 0.78), 0 0 54px rgba(221, 191, 255, 0.92);
+        text-shadow: 0 0 6px rgb(112 46 153 / 92%), 0 0 30px rgb(161 89 183 / 64%), 0 0 12px rgb(191 136 205 / 74%), 0 0 21px rgb(134 113 151 / 92%), 0 0 34px rgb(235 191 255 / 89%), 0 0 54px rgb(216 204 229 / 92%);
     }
     to {
-        text-shadow: 0 0 6px rgba(202, 228, 225, 0.98), 0 0 30px rgba(242, 191, 255, 0.52), 0 0 12px rgba(226, 191, 255, 0.92), 0 0 22px rgba(235, 191, 255, 0.78), 0 0 38px rgba(221, 191, 255, 0.92), 0 0 60px #FFF;
+        text-shadow: 0 0 6px rgba(221, 202, 228, 0.98), 0 0 30px rgba(242, 191, 255, 0.52), 0 0 12px rgba(226, 191, 255, 0.92), 0 0 22px rgba(235, 191, 255, 0.78), 0 0 38px rgba(221, 191, 255, 0.92), 0 0 60px #FFF;
     }
 }
 
