@@ -6,13 +6,13 @@ const hardLevel = document.getElementById('hard-level');
 const disabledBtn = document.querySelectorAll('button[disabled]');
 const listNew1 = JSON.parse(localStorage.getItem("resList"));
 const resultInfo1 = JSON.parse(localStorage.getItem("resultInfo"));
+const prewList = JSON.parse(localStorage.getItem("listNow"));
 const checkbox = document.querySelectorAll("input");
 
 const checkedboxesList = JSON.parse(localStorage.getItem("checkedboxes"));
 
 let m = [];
 let checkedboxes = []
-
 /* Обновление отмеченных ранее чекбоксов */
 
 Object.entries(checkbox).forEach(([key, value]) =>{
@@ -28,24 +28,22 @@ Object.entries(checkbox).forEach(([key, value]) =>{
 
 /* Работа с чекбоксами и сохранение текущих чекбоксов */
 
-if (listNew1 !== null){ 
-  if (listNew1[listNew1.length - 1].lvl == 10 && listNew1[listNew1.length - 1].hint == 0){
-
+if (listNew1 !== null && JSON.stringify(listNew1) !== JSON.stringify(prewList)) { 
+  if (listNew1[listNew1.length - 1].lvl === 10 && listNew1[listNew1.length - 1].hint === 0) {
     Object.entries(checkbox).forEach(([key, value]) => {
-      if (value.id == resultInfo1.id + '-check'){
-        value.checked = "true";
-        if (checkedboxesList === null){
+      if (value.id === resultInfo1.id + '-check') {
+        value.checked = true;
+        if (checkedboxesList === null) {
           checkedboxes.push(value.id);
-        }
-        else{
+        } else {
           checkedboxes = checkedboxesList;
           let m = 0;
-          for (i in checkedboxesList){
-            if (checkedboxesList[i] == value.id){
-              ++m;
+          for (let i in checkedboxesList) {
+            if (checkedboxesList[i] === value.id) {
+              m++;
             }
           }
-          if (m == 0){
+          if (m === 0) {
             checkedboxes.push(value.id);
           }
         }
@@ -53,7 +51,10 @@ if (listNew1 !== null){
       } 
     });
   }
+  let listNow = listNew1;
+  localStorage.setItem("listNow", JSON.stringify(listNow));
 }
+
 
 /* Отмена блокировки кнопок */
 
@@ -62,7 +63,6 @@ if (checkedboxesList !== null){
     for (l = 0; l < 3; ++l){
       disabledBtn[l].disabled = false;
     }
-    console.log(disabledBtn);
   }
   else{
     if (checkedboxesList.length > 5){
