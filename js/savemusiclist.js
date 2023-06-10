@@ -78,7 +78,6 @@ if (checkedboxesList !== null){
 
 Array.from(toTest).forEach((btn) => {
   btn.addEventListener("click", function(e) {
-    // localStorage.clear();
     e.preventDefault();
 
     let trackName = btn.parentNode.previousElementSibling.textContent;

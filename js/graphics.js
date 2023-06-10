@@ -3,7 +3,7 @@ const listNew2 = JSON.parse(localStorage.getItem("resList"));
 
 
 
-function createData(timeList, tryList, namelvl, idNew, lvlList){
+function createData(timeList, namelvl, idNew, lvlList){
     var densityData = {
         label: namelvl,
         data: timeList,
@@ -48,57 +48,43 @@ function createData(timeList, tryList, namelvl, idNew, lvlList){
                     scaleLabel: {
                         display: true,
                         labelString: "Уровень",
-                        fontColor: "black",
-                        font: { 
-                            family: "'Bellota Text', cursive",
-                            size: 14 
-                        }
+                        fontColor: "gray",
+                        fontFamily: "'Yanone Kaffeesatz', sans-serif",
+                        fontSize: 25
                     }
                 }],
                 yAxes: [{
                     scaleLabel: {
                         display: true,
                         labelString: "Время в секундах",
-                        fontColor: "black",
-                        font: { 
-                            family: "'Bellota Text', cursive",
-                            size: 14 
-                        }
+                        fontColor: "gray",
+                        fontFamily: "'Yanone Kaffeesatz', sans-serif",
+                        fontSize: 25
                     }
                 }]
-            },
-            plugins: {
-                datalabels: {
-                    anchor: 'center',
-                    align: 'center',
-                    font: { 
-                        family: "'Bellota Text', cursive",
-                        size: 14 
-                    }
-                }
             }
         }
     });
 }
 
 
-function addNewElement(tryCount, time, namelvl, timeList, tryList, lvlList) {
+function addNewElement(tryCount, time, namelvl, timeList, lvlList) {
     let trackInfo = document.createElement('div');
     trackInfo.classList.add("results-main-canvas");
-    trackInfo.setAttribute('id', tryCount + time);
+    trackInfo.setAttribute('id', tryCount + '.'+ time);
     main.append(trackInfo);
 
-    const trackInfo1 = document.getElementById(tryCount + time);
+    const trackInfo1 = document.getElementById(tryCount + '.'+ time);
 
     let newCanvas = document.createElement('canvas');
     newCanvas.classList.add("canvas");
-    newCanvas.setAttribute('id', tryCount + time +'-canvas');
+    newCanvas.setAttribute('id', tryCount + '.'+ time +'-canvas');
     trackInfo1.append(newCanvas);
 
-    let idNew = tryCount + time +'-canvas';
+    let idNew = tryCount + '.'+ time +'-canvas';
 
     
-    createData(timeList, tryList, namelvl, idNew, lvlList);
+    createData(timeList, namelvl, idNew, lvlList);
 }
 
 
@@ -145,7 +131,7 @@ for (let item in objList){
         lvlList.push(objList[item][value].lvl);
     }
 
-    addNewElement(objList[item][0].tryCount, objList[item][0].all, objList[item][0].namelvl, timeList, tryList, lvlList);
+    addNewElement(objList[item][0].tryCount, objList[item][0].all, objList[item][0].namelvl, timeList, lvlList);
 } 
 
 
