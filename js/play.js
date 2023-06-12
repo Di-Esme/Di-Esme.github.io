@@ -33,7 +33,8 @@ var playlist = function() {
     var track = getRandomNumber();
     pl = dict[track];
     playbtn.classList.add(track);
-    playbtn.innerText = playbtn.id;
+    // playbtn.innerText = playbtn.id;
+    playbtn.innerText = track;
     playbtn.addEventListener("click", function() {
       if (pl.paused){
         pl.play();

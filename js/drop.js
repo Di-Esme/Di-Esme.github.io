@@ -17,6 +17,9 @@ const closeModalBtn = document.querySelector(".btn-close");
 const results_wrapper = document.querySelector(".results__wrapper");
 const listNew = JSON.parse(localStorage.getItem("resList"));
 const trackPlayed = document.getElementById("mainaudio").addEventListener("loadeddata", exTime);
+const clickedBtn = JSON.parse(localStorage.getItem("resultInfo"));
+const oldBtn = localStorage.getItem("oldBtn");
+
 
 
 button.forEach(button => {
@@ -41,6 +44,8 @@ function handlerDragstart(event) {
     draggedBtn = this;
     leavedZone = this.closest('div');
 }
+
+/* Обновление прогресс-бара */
 
 function handlerDragend(event) {
     buttCont = $(".buttons__content .button").toArray().map(el => el.id);
@@ -71,17 +76,32 @@ var exTime = setInterval(function tick() {
 
 /* Высвечивание подсказки */
 
-var timerId = setInterval(function timer(){
-    if (lvlNew > 0){
-        $(showBtn).show('slow');
-        setTimeout(function () { $(showBtn).hide('slow'); }, 5000);
-    }
-}, lvlNew * 10000);
+// let oldBtnClicked = '';
+
+// if (oldBtn !== null){
+//     oldBtnClicked = oldBtn;
+//     console.log("Сейчас предыдущий ID равен ", oldBtnClicked);
+//     && clickedBtn.id === oldBtnClicked
+// }
+
+if (lvlNew !== null ){
+    console.log("Я запустил таймер на подсказку");
+    var timerId = setInterval(function timer(){
+        if (lvlNew > 0){
+            $(showBtn).show('slow');
+            setTimeout(function () { $(showBtn).hide('slow'); }, 5000);
+        }
+    }, lvlNew * 10000);
+
+    // localStorage.setItem("oldBtn", clickedBtn.id);
+    // console.log("Сейчас предыдущий ID равен ", clickedBtn.id);
+}
+
 
 /* Определение уровня + добавление данных в массив + информация о результатах */
 
 function nextLevel(incorAnswersCounter, corAnswersCounter, hintProgress, min, sec) {
-    let lvl = 0;
+    let lvl = 1;
     let answersCounter = incorAnswersCounter + corAnswersCounter;
     let res = incorAnswersCounter / answersCounter;
     let list = [];
@@ -90,16 +110,16 @@ function nextLevel(incorAnswersCounter, corAnswersCounter, hintProgress, min, se
 
     /* Определение уровня */
 
-    for (var i = 0.6; i >= 0.15; i -= 0.05) {
-        if (res <= i && res > i - 0.05) {
+    for (var i = 0.5; i >= 0.1; i -= 0.05) {
+        if (res < i && res >= i - 0.05) {
             lvl += 1;
             break;
         }else{
-            if (res > 0.6){
+            if (res >= 0.5){
                 lvl = 1;
                 break;
             }else{
-                if (res < 0.15){
+                if (res < 0.1){
                     lvl = 10;
                     break;
                 }else{
@@ -148,7 +168,19 @@ function nextLevel(incorAnswersCounter, corAnswersCounter, hintProgress, min, se
    
     if (typeof results.innerText !== 'undefined') {
         if (newTry.lvl < 10){
-            results.innerText = "Пока что у Вас дольно много ошибок. Продолжим!";
+            if (newTry.lvl > 7){
+                results.innerText = "Вы довольно неплохо справляетесь! Продолжайте в том же духе!";
+            }
+            else{
+                if(newTry.lvl > 3){
+                    results.innerText = "Пока что у Вас дольно много ошибок. Продолжим!";
+                }
+                else{
+                    results.innerText = "Ни искусство, ни мудрость не могут быть достигнуты, если им не учиться. Продолжим!";
+                }
+            }
+
+            
             next.style.display = 'inline-block';
         }
         else{
@@ -237,8 +269,8 @@ saveResults.addEventListener("click", (event) => {
     var opt =
     {
         margin: 0.3,
-        filename: 'Results.pdf',
-        html2canvas: {scale: 3},
+        filename: 'Таблица результатов.pdf',
+        html2canvas: {scale: 1},
         jsPDF: {unit: 'in', format: 'A3', orientation: 'portrait'}
     }
 
